@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="StarryUIRootTheme" parent="Theme.AppCompat.Light.NoActionBar" />
+
+    <style name="StarryUIBaseTheme" parent="StarryUIRootTheme">
+        <item name="starry_alpha_pressed">0.8</item>
+        <item name="starry_alpha_disabled">0.8</item>
+    </style>
+</resources>

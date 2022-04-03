@@ -1,0 +1,3 @@
+rootProject.name = "StarryCommonUi"
+include ':app'
+include ':StarryUI'
