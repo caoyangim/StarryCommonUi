@@ -26,8 +26,11 @@
         <attr name="starry_Layout_rightDividerInsetTop" format="dimension" />
         <attr name="starry_Layout_rightDividerInsetBottom" format="dimension" />
         <!--border-->
-        <attr name="starry_Layout_borderColor" format="color|reference" />
         <attr name="starry_Layout_borderWidth" format="dimension" />
+        <attr name="starry_Layout_borderColor" format="color|reference" />
+        <attr name="starry_Layout_borderPressedColor" format="color|reference" />
+        <attr name="starry_Layout_borderSelectedColor" format="color|reference" />
+        <attr name="starry_Layout_borderDisabledColor" format="color|reference" />
         <!--radius-->
         <attr name="starry_Layout_radius" format="dimension" />
         <attr name="starry_half_radius" format="boolean" />
@@ -52,5 +55,10 @@
         <attr name="starry_Layout_outlineInsetTop" format="dimension" />
         <attr name="starry_Layout_outlineInsetBottom" format="dimension" />
         <attr name="starry_Layout_outlineExcludePadding" format="dimension" />
+        <!--color-->
+        <attr name="starry_Layout_normalColor" format="color|reference" />
+        <attr name="starry_Layout_pressedColor" format="color|reference" />
+        <attr name="starry_Layout_selectedColor" format="color|reference" />
+        <attr name="starry_Layout_disabledColor" format="color|reference" />
     </declare-styleable>
 </resources>

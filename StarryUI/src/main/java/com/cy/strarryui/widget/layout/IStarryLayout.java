@@ -28,6 +28,17 @@ public interface IStarryLayout {
     @interface HideRadiusSide {
     }
 
+
+    int VIEW_STATE_NORMAL = 0;
+    int VIEW_STATE_DISABLED = 1;
+    int VIEW_STATE_PRESSED = 2;
+    int VIEW_STATE_SELECT = 3;
+
+    @IntDef({VIEW_STATE_NORMAL, VIEW_STATE_DISABLED, VIEW_STATE_PRESSED, VIEW_STATE_SELECT})
+    @Retention(RetentionPolicy.SOURCE)
+    @interface ViewState {
+    }
+
     /**
      * limit the width of a layout
      *

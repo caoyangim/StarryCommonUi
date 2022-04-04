@@ -74,7 +74,7 @@ public class StarryLayoutHelper implements IStarryLayout {
     private float[] mRadiusArray;
     private boolean mShouldUseRadiusArray;
     private final RectF mBorderRect;
-    private int mBorderColor = 0;
+    private final int[] mBorderColor = {0, 0, 0, 0};
     private int mBorderWidth = 1;
     private int mOuterNormalColor = 0;
     private final WeakReference<View> mOwner;
@@ -92,6 +92,8 @@ public class StarryLayoutHelper implements IStarryLayout {
     private int mOutlineInsetRight = 0;
     private int mOutlineInsetTop = 0;
     private int mOutlineInsetBottom = 0;
+
+    private final int[] mLayoutColor = {0, 0, 0, 0};
 
     public StarryLayoutHelper(Context context, AttributeSet attrs, int defAttr, View owner) {
         this(context, attrs, defAttr, 0, owner);
@@ -154,7 +156,13 @@ public class StarryLayoutHelper implements IStarryLayout {
                 } else if (index == R.styleable.StarryUILayout_starry_Layout_rightDividerInsetBottom) {
                     mRightDividerInsetBottom = ta.getDimensionPixelSize(index, mRightDividerInsetBottom);
                 } else if (index == R.styleable.StarryUILayout_starry_Layout_borderColor) {
-                    mBorderColor = ta.getColor(index, mBorderColor);
+                    mBorderColor[VIEW_STATE_NORMAL] = ta.getColor(index, 0);
+                } else if (index == R.styleable.StarryUILayout_starry_Layout_borderPressedColor) {
+                    mBorderColor[VIEW_STATE_PRESSED] = ta.getColor(index, 0);
+                } else if (index == R.styleable.StarryUILayout_starry_Layout_borderSelectedColor) {
+                    mBorderColor[VIEW_STATE_SELECT] = ta.getColor(index, 0);
+                } else if (index == R.styleable.StarryUILayout_starry_Layout_borderDisabledColor) {
+                    mBorderColor[VIEW_STATE_DISABLED] = ta.getColor(index, 0);
                 } else if (index == R.styleable.StarryUILayout_starry_Layout_borderWidth) {
                     mBorderWidth = ta.getDimensionPixelSize(index, mBorderWidth);
                 } else if (index == R.styleable.StarryUILayout_starry_Layout_radius) {
@@ -181,6 +189,14 @@ public class StarryLayoutHelper implements IStarryLayout {
                     mOutlineInsetBottom = ta.getDimensionPixelSize(index, 0);
                 } else if (index == R.styleable.StarryUILayout_starry_Layout_outlineExcludePadding) {
                     mIsOutlineExcludePadding = ta.getBoolean(index, false);
+                } else if (index == R.styleable.StarryUILayout_starry_Layout_normalColor) {
+                    mLayoutColor[VIEW_STATE_NORMAL] = ta.getColor(index, 0);
+                } else if (index == R.styleable.StarryUILayout_starry_Layout_pressedColor) {
+                    mLayoutColor[VIEW_STATE_PRESSED] = ta.getColor(index, 0);
+                } else if (index == R.styleable.StarryUILayout_starry_Layout_selectedColor) {
+                    mLayoutColor[VIEW_STATE_SELECT] = ta.getColor(index, 0);
+                } else if (index == R.styleable.StarryUILayout_starry_Layout_disabledColor) {
+                    mLayoutColor[VIEW_STATE_DISABLED] = ta.getColor(index, 0);
                 }
             }
             ta.recycle();
@@ -378,7 +394,7 @@ public class StarryLayoutHelper implements IStarryLayout {
 
     @Override
     public void setBorderColor(int borderColor) {
-        mBorderColor = borderColor;
+        mBorderColor[0] = borderColor;
     }
 
     @Override
@@ -551,6 +567,49 @@ public class StarryLayoutHelper implements IStarryLayout {
         return mShadowColor;
     }
 
+    public void onPressedChanged(View current, boolean pressed) {
+        onLayoutStateChanged();
+    }
+
+    public void onSelectedChanged(View current, boolean selected) {
+        onLayoutStateChanged();
+    }
+
+    public void onEnabledChanged(View current, boolean enabled) {
+        onLayoutStateChanged();
+    }
+
+    /**
+     * 返回应该取哪个state的颜色。
+     */
+    public void onLayoutStateChanged() {
+        View owner = mOwner.get();
+        if (owner == null) {
+            return;
+        }
+        int state = getCurrentLayoutState();
+        owner.setBackgroundColor(mLayoutColor[state]);
+        setRadiusAndShadow(mRadius, mShadowElevation, mShadowAlpha);
+    }
+
+    @ViewState
+    private int getCurrentLayoutState() {
+        View owner = mOwner.get();
+        if (owner == null) {
+            return VIEW_STATE_NORMAL;
+        }
+        if (!owner.isEnabled()) {
+            return VIEW_STATE_DISABLED;
+        }
+        if (owner.isPressed()) {
+            return VIEW_STATE_PRESSED;
+        }
+        if (owner.isSelected()) {
+            return VIEW_STATE_SELECT;
+        }
+        return VIEW_STATE_NORMAL;
+    }
+
     private void setShadowColorInner(int shadowColor) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
             View owner = mOwner.get();
@@ -613,7 +672,7 @@ public class StarryLayoutHelper implements IStarryLayout {
         }
         int radius = getRealRadius();
         boolean needCheckFakeOuterNormalDraw = radius > 0 && !useFeature() && mOuterNormalColor != 0;
-        boolean needDrawBorder = mBorderWidth > 0 && mBorderColor != 0;
+        boolean needDrawBorder = mBorderWidth > 0 && hasBorderColor();
         if (!needCheckFakeOuterNormalDraw && !needDrawBorder) {
             return;
         }
@@ -682,7 +741,8 @@ public class StarryLayoutHelper implements IStarryLayout {
         }
 
         if (needDrawBorder) {
-            mClipPaint.setColor(mBorderColor);
+            int state = getCurrentLayoutState();
+            mClipPaint.setColor(mBorderColor[state]);
             mClipPaint.setStrokeWidth(mBorderWidth);
             mClipPaint.setStyle(Paint.Style.STROKE);
             if (mShouldUseRadiusArray) {
@@ -694,6 +754,20 @@ public class StarryLayoutHelper implements IStarryLayout {
             }
         }
         canvas.restore();
+    }
+
+    /**
+     * 是否设置borderColor
+     *
+     * @return false 一个borderColor都没设置
+     */
+    private boolean hasBorderColor() {
+        for (int stateColor : mBorderColor) {
+            if (stateColor != 0) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private void drawRoundRect(Canvas canvas, RectF rect, float[] radiusArray, Paint paint) {

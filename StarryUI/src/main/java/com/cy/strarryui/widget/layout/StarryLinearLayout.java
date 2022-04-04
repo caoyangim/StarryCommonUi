@@ -37,6 +37,24 @@ public class StarryLinearLayout extends AlphaLinearLayout implements IStarryLayo
     }
 
     @Override
+    public void setPressed(boolean pressed) {
+        super.setPressed(pressed);
+        mLayoutHelper.onPressedChanged(this, pressed);
+    }
+
+    @Override
+    public void setSelected(boolean selected) {
+        super.setSelected(selected);
+        mLayoutHelper.onSelectedChanged(this, selected);
+    }
+
+    @Override
+    public void setEnabled(boolean enabled) {
+        super.setEnabled(enabled);
+        mLayoutHelper.onEnabledChanged(this, enabled);
+    }
+
+    @Override
     public void updateTopDivider(int topInsetLeft, int topInsetRight, int topDividerHeight, int topDividerColor) {
         mLayoutHelper.updateTopDivider(topInsetLeft, topInsetRight, topDividerHeight, topDividerColor);
         invalidate();
@@ -251,6 +269,7 @@ public class StarryLinearLayout extends AlphaLinearLayout implements IStarryLayo
     @Override
     protected void dispatchDraw(Canvas canvas) {
         super.dispatchDraw(canvas);
+//        mLayoutHelper.drawBackground();
         mLayoutHelper.drawDividers(canvas, getWidth(), getHeight());
         mLayoutHelper.dispatchRoundBorderDraw(canvas);
     }
