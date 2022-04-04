@@ -6,5 +6,8 @@
     <style name="StarryUIBaseTheme" parent="StarryUIRootTheme">
         <item name="starry_alpha_pressed">0.8</item>
         <item name="starry_alpha_disabled">0.8</item>
+        <item name="starry_color_separator_light">#F0F2F4</item>
+        <item name="starry_color_separator_dark">#E3E6EA</item>
+        <item name="starry_general_shadow_alpha">0.25</item>
     </style>
 </resources>

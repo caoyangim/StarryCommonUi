@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="starry_alpha_pressed" format="float" />
+    <attr name="starry_alpha_disabled" format="float" />
+
+    <attr name="starry_color_separator_light" format="color" />
+    <attr name="starry_color_separator_dark" format="color" />
+
+    <attr name="starry_general_shadow_alpha" format="float" />
+    <attr name="starry_general_shadow_elevation" format="float" />
+</resources>

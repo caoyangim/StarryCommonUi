@@ -3,7 +3,7 @@ package com.cy.strarryui.widget.alpha;
 import android.view.View;
 
 import com.cy.strarryui.R;
-import com.cy.strarryui.utils.ResHelper;
+import com.cy.strarryui.utils.ThemeHelper;
 
 import java.lang.ref.WeakReference;
 
@@ -31,8 +31,8 @@ public class AlphaViewHelper implements IAlphaViewHelper {
 
     public AlphaViewHelper(final View target) {
         mTarget = new WeakReference<>(target);
-        mPressedAlpha = ResHelper.resolveFloat(target.getContext(), R.attr.starry_alpha_pressed);
-        mDisabledAlpha = ResHelper.resolveFloat(target.getContext(), R.attr.starry_alpha_disabled);
+        mPressedAlpha = ThemeHelper.resolveFloat(target.getContext(), R.attr.starry_alpha_pressed);
+        mDisabledAlpha = ThemeHelper.resolveFloat(target.getContext(), R.attr.starry_alpha_disabled);
     }
 
     public AlphaViewHelper(final View target, final float pressedAlpha, final float disabledAlpha) {

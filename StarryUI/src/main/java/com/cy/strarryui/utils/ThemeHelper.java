@@ -30,7 +30,7 @@ import java.lang.annotation.RetentionPolicy;
 /**
  * @author Duckbb
  */
-public class ResHelper {
+public class ThemeHelper {
     @ColorInt
     public static int getDisabledColor(final Context context) {
         final int primaryColor = resolveColor(context, android.R.attr.textColorPrimary);
@@ -253,7 +253,7 @@ public class ResHelper {
 
     public static ColorStateList getActionTextStateList(final Context context, int newPrimaryColor) {
         final int fallBackButtonColor =
-                ResHelper.resolveColor(context, android.R.attr.textColorPrimary);
+                ThemeHelper.resolveColor(context, android.R.attr.textColorPrimary);
         if (newPrimaryColor == 0) {
             newPrimaryColor = fallBackButtonColor;
         }
@@ -262,7 +262,7 @@ public class ResHelper {
                         new int[]{-android.R.attr.state_enabled}, // disabled
                         new int[]{} // enabled
                 };
-        final int[] colors = new int[]{ResHelper.adjustAlpha(newPrimaryColor, 0.4f), newPrimaryColor};
+        final int[] colors = new int[]{ThemeHelper.adjustAlpha(newPrimaryColor, 0.4f), newPrimaryColor};
         return new ColorStateList(states, colors);
     }
 

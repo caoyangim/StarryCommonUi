@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="StarryUILayout">
+        <attr name="starry_Layout_android_maxWidth" format="dimension" />
+        <attr name="starry_Layout_android_maxHeight" format="dimension" />
+        <attr name="starry_Layout_android_minWidth" format="dimension" />
+        <attr name="starry_Layout_android_minHeight" format="dimension" />
+        <!--top divider-->
+        <attr name="starry_Layout_topDividerColor" format="color|reference" />
+        <attr name="starry_Layout_topDividerHeight" format="dimension" />
+        <attr name="starry_Layout_topDividerInsetLeft" format="dimension" />
+        <attr name="starry_Layout_topDividerInsetRight" format="dimension" />
+        <!--bottom divider-->
+        <attr name="starry_Layout_bottomDividerColor" format="color|reference" />
+        <attr name="starry_Layout_bottomDividerHeight" format="dimension" />
+        <attr name="starry_Layout_bottomDividerInsetLeft" format="dimension" />
+        <attr name="starry_Layout_bottomDividerInsetRight" format="dimension" />
+        <!--left divider-->
+        <attr name="starry_Layout_leftDividerColor" format="color|reference" />
+        <attr name="starry_Layout_leftDividerWidth" format="dimension" />
+        <attr name="starry_Layout_leftDividerInsetTop" format="dimension" />
+        <attr name="starry_Layout_leftDividerInsetBottom" format="dimension" />
+        <!--right divider-->
+        <attr name="starry_Layout_rightDividerColor" format="color|reference" />
+        <attr name="starry_Layout_rightDividerWidth" format="dimension" />
+        <attr name="starry_Layout_rightDividerInsetTop" format="dimension" />
+        <attr name="starry_Layout_rightDividerInsetBottom" format="dimension" />
+        <!--border-->
+        <attr name="starry_Layout_borderColor" format="color|reference" />
+        <attr name="starry_Layout_borderWidth" format="dimension" />
+        <!--radius-->
+        <attr name="starry_Layout_radius" format="dimension" />
+        <attr name="starry_half_radius" format="boolean" />
+        <!--21版本下，裁剪圆角边框的镂空颜色-->
+        <attr name="starry_Layout_outerNormalColor" format="color|reference" />
+        <!--隐藏圆角的类型，默认none-->
+        <attr name="starry_Layout_hideRadiusSide" format="enum">
+            <enum name="none" value="0" />
+            <enum name="top" value="1" />
+            <enum name="right" value="2" />
+            <enum name="bottom" value="3" />
+            <enum name="left" value="4" />
+        </attr>
+        <!--是否显示边框-->
+        <attr name="starry_Layout_showBorderOnlyBeforeL" format="boolean" />
+        <!--shadow-->
+        <attr name="starry_Layout_shadowElevation" format="dimension" />
+        <attr name="starry_Layout_shadowAlpha" format="dimension" />
+        <!--outline-->
+        <attr name="starry_Layout_outlineInsetLeft" format="dimension" />
+        <attr name="starry_Layout_outlineInsetRight" format="dimension" />
+        <attr name="starry_Layout_outlineInsetTop" format="dimension" />
+        <attr name="starry_Layout_outlineInsetBottom" format="dimension" />
+        <attr name="starry_Layout_outlineExcludePadding" format="dimension" />
+    </declare-styleable>
+</resources>
