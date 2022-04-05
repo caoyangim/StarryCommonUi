@@ -161,6 +161,24 @@ public class StarryRelativeLayout extends AlphaRelativeLayout implements IStarry
     }
 
     @Override
+    public void setPressBorderColor(@ColorInt int borderColor) {
+        mLayoutHelper.setPressBorderColor(borderColor);
+        invalidate();
+    }
+
+    @Override
+    public void setSelectBorderColor(@ColorInt int borderColor) {
+        mLayoutHelper.setSelectBorderColor(borderColor);
+        invalidate();
+    }
+
+    @Override
+    public void setDisableBorderColor(@ColorInt int borderColor) {
+        mLayoutHelper.setDisableBorderColor(borderColor);
+        invalidate();
+    }
+
+    @Override
     public void setBorderWidth(int borderWidth) {
         mLayoutHelper.setBorderWidth(borderWidth);
         invalidate();

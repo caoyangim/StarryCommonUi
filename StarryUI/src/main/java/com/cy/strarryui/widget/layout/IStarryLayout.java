@@ -202,6 +202,27 @@ public interface IStarryLayout {
     void setBorderColor(@ColorInt int borderColor);
 
     /**
+     * press border color, if you don not set it, the layout will not draw the border
+     *
+     * @param borderColor
+     */
+    void setPressBorderColor(@ColorInt int borderColor);
+
+    /**
+     * press border color, if you don not set it, the layout will not draw the border
+     *
+     * @param borderColor
+     */
+    void setSelectBorderColor(@ColorInt int borderColor);
+
+    /**
+     * press border color, if you don not set it, the layout will not draw the border
+     *
+     * @param borderColor
+     */
+    void setDisableBorderColor(@ColorInt int borderColor);
+
+    /**
      * border width, default is 1px, usually no need to set
      *
      * @param borderWidth

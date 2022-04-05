@@ -3,6 +3,7 @@ package com.cy.strarryui.widget.layout;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.util.AttributeSet;
+import android.util.Log;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
@@ -37,21 +38,12 @@ public class StarryLinearLayout extends AlphaLinearLayout implements IStarryLayo
     }
 
     @Override
-    public void setPressed(boolean pressed) {
-        super.setPressed(pressed);
-        mLayoutHelper.onPressedChanged(this, pressed);
-    }
-
-    @Override
-    public void setSelected(boolean selected) {
-        super.setSelected(selected);
-        mLayoutHelper.onSelectedChanged(this, selected);
-    }
-
-    @Override
-    public void setEnabled(boolean enabled) {
-        super.setEnabled(enabled);
-        mLayoutHelper.onEnabledChanged(this, enabled);
+    protected void drawableStateChanged() {
+        super.drawableStateChanged();
+        final int[] state = getDrawableState();
+        for (int i : state) {
+            Log.e(">>>", this.hashCode() + "," + Integer.toHexString(i));
+        }
     }
 
     @Override
@@ -178,6 +170,24 @@ public class StarryLinearLayout extends AlphaLinearLayout implements IStarryLayo
     @Override
     public void setBorderColor(@ColorInt int borderColor) {
         mLayoutHelper.setBorderColor(borderColor);
+        invalidate();
+    }
+
+    @Override
+    public void setPressBorderColor(@ColorInt int borderColor) {
+        mLayoutHelper.setPressBorderColor(borderColor);
+        invalidate();
+    }
+
+    @Override
+    public void setSelectBorderColor(@ColorInt int borderColor) {
+        mLayoutHelper.setSelectBorderColor(borderColor);
+        invalidate();
+    }
+
+    @Override
+    public void setDisableBorderColor(@ColorInt int borderColor) {
+        mLayoutHelper.setDisableBorderColor(borderColor);
         invalidate();
     }
 

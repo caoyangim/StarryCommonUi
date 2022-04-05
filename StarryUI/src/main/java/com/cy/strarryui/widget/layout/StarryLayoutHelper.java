@@ -11,12 +11,16 @@ import android.graphics.Path;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.RectF;
+import android.graphics.drawable.GradientDrawable;
+import android.graphics.drawable.StateListDrawable;
 import android.os.Build;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewOutlineProvider;
 
 import androidx.annotation.ChecksSdkIntAtLeast;
+import androidx.annotation.ColorInt;
+import androidx.annotation.NonNull;
 
 import com.cy.strarryui.R;
 import com.cy.strarryui.utils.ThemeHelper;
@@ -30,6 +34,10 @@ public class StarryLayoutHelper implements IStarryLayout {
 
     public static final int RADIUS_OF_HALF_VIEW_HEIGHT = -1;
     public static final int RADIUS_OF_HALF_VIEW_WIDTH = -2;
+
+    // 颜色渐变方向
+    private static final int COLOR_ORIENTATION_HORIZONTAL = 0;
+    private static final int COLOR_ORIENTATION_VERTICAL = 1;
     private final Context mContext;
     // size
     private int mWidthLimit = 0;
@@ -93,7 +101,14 @@ public class StarryLayoutHelper implements IStarryLayout {
     private int mOutlineInsetTop = 0;
     private int mOutlineInsetBottom = 0;
 
+    //color
     private final int[] mLayoutColor = {0, 0, 0, 0};
+    private final int[] mLayoutColorEnd = {0, 0, 0, 0};
+    private GradientDrawable drawableNormal;
+    private GradientDrawable drawablePressed;
+    private GradientDrawable drawableDisable;
+    private GradientDrawable drawableSelect;
+    private int mColorOrientation = COLOR_ORIENTATION_HORIZONTAL;
 
     public StarryLayoutHelper(Context context, AttributeSet attrs, int defAttr, View owner) {
         this(context, attrs, defAttr, 0, owner);
@@ -155,15 +170,15 @@ public class StarryLayoutHelper implements IStarryLayout {
                     mRightDividerInsetTop = ta.getDimensionPixelSize(index, mRightDividerInsetTop);
                 } else if (index == R.styleable.StarryUILayout_starry_Layout_rightDividerInsetBottom) {
                     mRightDividerInsetBottom = ta.getDimensionPixelSize(index, mRightDividerInsetBottom);
-                } else if (index == R.styleable.StarryUILayout_starry_Layout_borderColor) {
+                } else if (index == R.styleable.StarryUILayout_starry_Layout_border_normalColor) {
                     mBorderColor[VIEW_STATE_NORMAL] = ta.getColor(index, 0);
-                } else if (index == R.styleable.StarryUILayout_starry_Layout_borderPressedColor) {
+                } else if (index == R.styleable.StarryUILayout_starry_Layout_border_pressedColor) {
                     mBorderColor[VIEW_STATE_PRESSED] = ta.getColor(index, 0);
-                } else if (index == R.styleable.StarryUILayout_starry_Layout_borderSelectedColor) {
+                } else if (index == R.styleable.StarryUILayout_starry_Layout_border_selectedColor) {
                     mBorderColor[VIEW_STATE_SELECT] = ta.getColor(index, 0);
-                } else if (index == R.styleable.StarryUILayout_starry_Layout_borderDisabledColor) {
+                } else if (index == R.styleable.StarryUILayout_starry_Layout_border_disabledColor) {
                     mBorderColor[VIEW_STATE_DISABLED] = ta.getColor(index, 0);
-                } else if (index == R.styleable.StarryUILayout_starry_Layout_borderWidth) {
+                } else if (index == R.styleable.StarryUILayout_starry_Layout_border_width) {
                     mBorderWidth = ta.getDimensionPixelSize(index, mBorderWidth);
                 } else if (index == R.styleable.StarryUILayout_starry_Layout_radius) {
                     radius = ta.getDimensionPixelSize(index, 0);
@@ -197,6 +212,16 @@ public class StarryLayoutHelper implements IStarryLayout {
                     mLayoutColor[VIEW_STATE_SELECT] = ta.getColor(index, 0);
                 } else if (index == R.styleable.StarryUILayout_starry_Layout_disabledColor) {
                     mLayoutColor[VIEW_STATE_DISABLED] = ta.getColor(index, 0);
+                } else if (index == R.styleable.StarryUILayout_starry_Layout_normalColor_end) {
+                    mLayoutColorEnd[VIEW_STATE_NORMAL] = ta.getColor(index, 0);
+                } else if (index == R.styleable.StarryUILayout_starry_Layout_pressedColor_end) {
+                    mLayoutColorEnd[VIEW_STATE_PRESSED] = ta.getColor(index, 0);
+                } else if (index == R.styleable.StarryUILayout_starry_Layout_selectedColor_end) {
+                    mLayoutColorEnd[VIEW_STATE_SELECT] = ta.getColor(index, 0);
+                } else if (index == R.styleable.StarryUILayout_starry_Layout_disabledColor_end) {
+                    mLayoutColorEnd[VIEW_STATE_DISABLED] = ta.getColor(index, 0);
+                } else if (index == R.styleable.StarryUILayout_starry_Layout_ColorOrientation) {
+                    mColorOrientation = ta.getInt(index, mColorOrientation);
                 }
             }
             ta.recycle();
@@ -205,6 +230,56 @@ public class StarryLayoutHelper implements IStarryLayout {
             shadow = ThemeHelper.resolveDimension(context, R.attr.starry_general_shadow_elevation);
         }
         setRadiusAndShadow(radius, mHideRadiusSide, shadow, mShadowAlpha);
+        initBackDrawable();
+        setBackground();
+    }
+
+    private void initBackDrawable() {
+        final int[] normalColor = getColor(VIEW_STATE_NORMAL);
+        final int[] pressedColor = getColor(VIEW_STATE_PRESSED);
+        final int[] disabledColor = getColor(VIEW_STATE_DISABLED);
+        final int[] selectedColor = getColor(VIEW_STATE_SELECT);
+
+        final GradientDrawable.Orientation orientation = getOrientation();
+        drawableNormal = new GradientDrawable(orientation, normalColor);
+        drawableNormal.setShape(GradientDrawable.RECTANGLE);
+        drawablePressed = new GradientDrawable(orientation, pressedColor);
+        drawablePressed.setShape(GradientDrawable.RECTANGLE);
+        drawableDisable = new GradientDrawable(orientation, disabledColor);
+        drawableDisable.setShape(GradientDrawable.RECTANGLE);
+        drawableSelect = new GradientDrawable(orientation, selectedColor);
+        drawableSelect.setShape(GradientDrawable.RECTANGLE);
+    }
+
+    private int[] getColor(@ViewState int state) {
+        return new int[]{
+                mLayoutColor[state],
+                mLayoutColorEnd[state] == 0 ? mLayoutColor[state] : mLayoutColorEnd[state]
+        };
+    }
+
+    private void setBackground() {
+        View owner = mOwner.get();
+        if (owner == null || owner.getBackground() != null) {
+            return;
+        }
+        final StateListDrawable stateListDrawable = new StateListDrawable();
+        stateListDrawable.addState(new int[]{android.R.attr.state_selected}, drawableSelect);
+        stateListDrawable.addState(new int[]{android.R.attr.state_pressed}, drawablePressed);
+        stateListDrawable.addState(new int[]{-android.R.attr.state_enabled}, drawableDisable);
+        stateListDrawable.addState(new int[]{}, drawableNormal);
+        owner.setBackground(stateListDrawable);
+    }
+
+    @NonNull
+    private GradientDrawable.Orientation getOrientation() {
+        switch (mColorOrientation) {
+            case COLOR_ORIENTATION_HORIZONTAL:
+                return GradientDrawable.Orientation.LEFT_RIGHT;
+            case COLOR_ORIENTATION_VERTICAL:
+                return GradientDrawable.Orientation.TOP_BOTTOM;
+        }
+        return GradientDrawable.Orientation.LEFT_RIGHT;
     }
 
     @Override
@@ -393,8 +468,23 @@ public class StarryLayoutHelper implements IStarryLayout {
     }
 
     @Override
-    public void setBorderColor(int borderColor) {
-        mBorderColor[0] = borderColor;
+    public void setBorderColor(@ColorInt int borderColor) {
+        mBorderColor[VIEW_STATE_NORMAL] = borderColor;
+    }
+
+    @Override
+    public void setPressBorderColor(@ColorInt int borderColor) {
+        mBorderColor[VIEW_STATE_PRESSED] = borderColor;
+    }
+
+    @Override
+    public void setSelectBorderColor(@ColorInt int borderColor) {
+        mBorderColor[VIEW_STATE_SELECT] = borderColor;
+    }
+
+    @Override
+    public void setDisableBorderColor(@ColorInt int borderColor) {
+        mBorderColor[VIEW_STATE_DISABLED] = borderColor;
     }
 
     @Override
@@ -565,31 +655,6 @@ public class StarryLayoutHelper implements IStarryLayout {
     @Override
     public int getShadowColor() {
         return mShadowColor;
-    }
-
-    public void onPressedChanged(View current, boolean pressed) {
-        onLayoutStateChanged();
-    }
-
-    public void onSelectedChanged(View current, boolean selected) {
-        onLayoutStateChanged();
-    }
-
-    public void onEnabledChanged(View current, boolean enabled) {
-        onLayoutStateChanged();
-    }
-
-    /**
-     * 返回应该取哪个state的颜色。
-     */
-    public void onLayoutStateChanged() {
-        View owner = mOwner.get();
-        if (owner == null) {
-            return;
-        }
-        int state = getCurrentLayoutState();
-        owner.setBackgroundColor(mLayoutColor[state]);
-        setRadiusAndShadow(mRadius, mShadowElevation, mShadowAlpha);
     }
 
     @ViewState
