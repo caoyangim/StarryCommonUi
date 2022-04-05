@@ -4,6 +4,7 @@ buildscript {
     addRepos(repositories)
     dependencies {
         classpath deps.gradle_plugin
+        classpath deps.maven_gradle_plugin
     }
 }
 
