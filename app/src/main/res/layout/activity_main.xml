@@ -3,28 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".activity.MainActivity">
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="200dp"
-        android:src="@mipmap/ic_beauty_girl" />
-
-    <com.cy.strarryui.widget.layout.StarryFrameLayout
-        android:id="@+id/ll_common"
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragment_container"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:layout_margin="10dp"
-        android:clickable="true"
-        android:focusable="true"
-        android:background="@color/menu_green_normal"
-        app:starry_Layout_showBorderOnlyBeforeL="false"
-        app:starry_Layout_borderWidth="3dp"
-        app:starry_Layout_topDividerColor="#000000"
-        app:starry_Layout_topDividerHeight="3dp"
-        app:starry_half_radius="true" />
-
+        android:layout_height="match_parent" />
 
 </androidx.appcompat.widget.LinearLayoutCompat>

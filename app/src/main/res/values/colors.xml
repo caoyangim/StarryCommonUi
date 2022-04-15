@@ -12,4 +12,6 @@
     <color name="menu_green_pressed">#30A070</color>
     <color name="menu_purple_normal">#9932CC</color>
     <color name="menu_purple_pressed">#9F79EE</color>
+
+    <color name="white">#FFFFFF</color>
 </resources>

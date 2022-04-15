@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#EEEEEE">
+
+    <LinearLayout android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:orientation="vertical"
+        android:gravity="center_horizontal">
+
+        <com.cy.strarryui.widget.layout.StarryLinearLayout
+            android:id="@+id/layout_starry"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:layout_marginVertical="@dimen/ui_common_margin_vertical"
+            android:layout_marginHorizontal="@dimen/ui_common_margin_horizontal"
+            app:starry_Layout_normalColor="@color/white">
+
+            <TextView
+                android:id="@+id/tv_starry_radius"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                tools:text="radius:xx" />
+
+            <TextView
+                android:id="@+id/tv_starry_alpha"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/ui_common_margin_vertical"
+                android:textSize="14sp"
+                tools:text="alpha:xx" />
+
+            <TextView
+                android:id="@+id/tv_starry_elevation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/ui_common_margin_vertical"
+                android:textSize="14sp"
+                tools:text="elevation:xx" />
+
+        </com.cy.strarryui.widget.layout.StarryLinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/ui_common_margin_vertical"
+            android:layout_marginHorizontal="@dimen/ui_common_margin_horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/layout_starry_seekbar_radius" />
+
+            <androidx.appcompat.widget.AppCompatSeekBar
+                android:id="@+id/seekbar_radius"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/ui_common_margin_vertical"
+            android:layout_marginHorizontal="@dimen/ui_common_margin_horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/layout_starry_seekbar_alpha" />
+
+            <androidx.appcompat.widget.AppCompatSeekBar
+                android:id="@+id/seekbar_alpha"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/ui_common_margin_vertical"
+            android:layout_marginHorizontal="@dimen/ui_common_margin_horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/layout_starry_seekbar_elevation" />
+
+            <androidx.appcompat.widget.AppCompatSeekBar
+                android:id="@+id/seekbar_elevation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+
+    </LinearLayout>
+</ScrollView>
