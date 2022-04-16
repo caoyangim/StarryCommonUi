@@ -8,31 +8,31 @@ import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.cy.strarryui.widget.alpha.AlphaConstraintLayout;
+import com.cy.strarryui.widget.alpha.AlphaButton;
 
 /**
  * @author Duckbb
  */
-public class StarryConstraintLayout extends AlphaConstraintLayout implements IStarryLayout {
+public class StarryButton extends AlphaButton implements IStarryLayout {
     private StarryLayoutHelper mLayoutHelper;
 
-    public StarryConstraintLayout(@NonNull Context context) {
+    public StarryButton(@NonNull Context context) {
         this(context, null);
     }
 
-    public StarryConstraintLayout(@NonNull Context context, @Nullable AttributeSet attrs) {
+    public StarryButton(@NonNull Context context, @Nullable AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public StarryConstraintLayout(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public StarryButton(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init(context, attrs, defStyleAttr);
     }
 
     private void init(Context context, AttributeSet attrs, int defStyleAttr) {
         mLayoutHelper = new StarryLayoutHelper(context, attrs, defStyleAttr, this);
-        setChangeAlphaWhenPress(false);
-        setChangeAlphaWhenDisable(false);
+        setChangeAlphaWhenPress(true);
+        setChangeAlphaWhenDisable(true);
     }
 
     @Override
@@ -157,6 +157,38 @@ public class StarryConstraintLayout extends AlphaConstraintLayout implements ISt
     }
 
     @Override
+    public void setLayoutColor(@ColorInt int color) {
+        mLayoutHelper.setLayoutColor(color);
+    }
+
+    @Override
+    public void setPressLayoutColor(@ColorInt int pressColor) {
+        mLayoutHelper.setPressLayoutColor(pressColor);
+    }
+
+    @Override
+    public void setLayoutColor(@ColorInt int normalColor, @ColorInt int pressedColor,
+                               @ColorInt int disabledColor, @ColorInt int selectedColor) {
+        mLayoutHelper.setLayoutColor(normalColor, pressedColor, disabledColor, selectedColor);
+    }
+
+    @Override
+    public void setLayoutColorEnd(@ColorInt int endColor) {
+        mLayoutHelper.setLayoutColorEnd(endColor);
+    }
+
+    @Override
+    public void setPressLayoutColorEnd(@ColorInt int pressEndColor) {
+        mLayoutHelper.setPressLayoutColorEnd(pressEndColor);
+    }
+
+    @Override
+    public void setLayoutColorEnd(@ColorInt int normalColor, @ColorInt int pressedColor,
+                                  @ColorInt int disabledColor, @ColorInt int selectedColor) {
+        mLayoutHelper.setLayoutColorEnd(normalColor, pressedColor, disabledColor, selectedColor);
+    }
+
+    @Override
     public void setBorderColor(@ColorInt int borderColor) {
         mLayoutHelper.setBorderColor(borderColor);
         invalidate();
@@ -263,38 +295,6 @@ public class StarryConstraintLayout extends AlphaConstraintLayout implements ISt
     @Override
     public float getShadowAlpha() {
         return mLayoutHelper.getShadowAlpha();
-    }
-
-    @Override
-    public void setLayoutColor(@ColorInt int color) {
-        mLayoutHelper.setLayoutColor(color);
-    }
-
-    @Override
-    public void setPressLayoutColor(@ColorInt int pressColor) {
-        mLayoutHelper.setPressLayoutColor(pressColor);
-    }
-
-    @Override
-    public void setLayoutColor(@ColorInt int normalColor, @ColorInt int pressedColor,
-                               @ColorInt int disabledColor, @ColorInt int selectedColor) {
-        mLayoutHelper.setLayoutColor(normalColor, pressedColor, disabledColor, selectedColor);
-    }
-
-    @Override
-    public void setLayoutColorEnd(@ColorInt int endColor) {
-        mLayoutHelper.setLayoutColorEnd(endColor);
-    }
-
-    @Override
-    public void setPressLayoutColorEnd(@ColorInt int pressEndColor) {
-        mLayoutHelper.setPressLayoutColorEnd(pressEndColor);
-    }
-
-    @Override
-    public void setLayoutColorEnd(@ColorInt int normalColor, @ColorInt int pressedColor,
-                                  @ColorInt int disabledColor, @ColorInt int selectedColor) {
-        mLayoutHelper.setLayoutColorEnd(normalColor, pressedColor, disabledColor, selectedColor);
     }
 
     @Override

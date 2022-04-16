@@ -98,5 +98,66 @@
         </LinearLayout>
 
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/ui_common_margin_vertical">
+
+            <com.cy.strarryui.widget.layout.StarryButton
+                android:id="@+id/btn_choose_start_color"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:starry_Layout_normalColor="@color/blue"
+                android:textColor="@color/white"
+                app:starry_Layout_radius="5dp"
+                android:paddingVertical="5dp"
+                android:paddingHorizontal="10dp"
+                app:starry_Layout_border_width="1dp"
+                app:starry_Layout_border_normalColor="#000000"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/fl_choose_start_color_value"
+                android:text="起始颜色" />
+
+            <com.cy.strarryui.widget.layout.StarryFrameLayout
+                android:id="@+id/fl_choose_start_color_value"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                app:starry_half_radius="true"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/btn_choose_start_color"
+                app:layout_constraintEnd_toStartOf="@id/btn_choose_end_color"
+                android:background="@color/white" />
+
+            <com.cy.strarryui.widget.layout.StarryButton
+                android:id="@+id/btn_choose_end_color"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:starry_Layout_normalColor="@color/blue"
+                android:textColor="@color/white"
+                app:starry_Layout_radius="5dp"
+                android:paddingVertical="5dp"
+                android:paddingHorizontal="10dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/fl_choose_start_color_value"
+                app:layout_constraintEnd_toStartOf="@id/fl_choose_end_color_value"
+                android:padding="5dp"
+                android:text="结束颜色" />
+
+            <com.cy.strarryui.widget.layout.StarryFrameLayout
+                android:id="@+id/fl_choose_end_color_value"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                app:starry_half_radius="true"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/btn_choose_end_color"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:background="@color/white" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
     </LinearLayout>
 </ScrollView>

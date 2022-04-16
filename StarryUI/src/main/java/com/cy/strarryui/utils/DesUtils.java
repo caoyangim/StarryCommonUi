@@ -1,6 +1,6 @@
 package com.cy.strarryui.utils;
 
-import android.content.Context;
+import android.content.res.Resources;
 import android.util.TypedValue;
 
 /**
@@ -11,32 +11,32 @@ public class DesUtils {
     /**
      * dp转px
      */
-    public static int dpToPx(final Context context, final float dpVal) {
+    public static int dpToPx(final float dpVal) {
         return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
-                dpVal, context.getResources().getDisplayMetrics());
+                dpVal, Resources.getSystem().getDisplayMetrics());
     }
 
     /**
      * sp转px
      */
-    public static int spToPx(final Context context, final float spVal) {
+    public static int spToPx(final float spVal) {
         return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP,
-                spVal, context.getResources().getDisplayMetrics());
+                spVal, Resources.getSystem().getDisplayMetrics());
     }
 
     /**
      * px转dp
      */
-    public static float pxToDp(final Context context, final float pxVal) {
-        final float scale = context.getResources().getDisplayMetrics().density;
+    public static float pxToDp(final float pxVal) {
+        final float scale = Resources.getSystem().getDisplayMetrics().density;
         return (pxVal / scale);
     }
 
     /**
      * px转sp
      */
-    public static float pxToSp(final Context context, final float pxVal) {
-        return (pxVal / context.getResources().getDisplayMetrics().scaledDensity);
+    public static float pxToSp(final float pxVal) {
+        return (pxVal / Resources.getSystem().getDisplayMetrics().scaledDensity);
     }
 
 }

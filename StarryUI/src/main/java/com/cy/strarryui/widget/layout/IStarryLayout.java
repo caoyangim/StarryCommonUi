@@ -338,4 +338,44 @@ public interface IStarryLayout {
      * @param color
      */
     void setOuterNormalColor(int color);
+
+    /**
+     * 设置背景色，不可与setBackground混用
+     *
+     * @param color colorInt
+     */
+    void setLayoutColor(@ColorInt int color);
+
+    /**
+     * 设置按压状态颜色
+     *
+     * @param pressColor colorInt
+     */
+    void setPressLayoutColor(@ColorInt int pressColor);
+
+    /**
+     * 设置各状态背景色
+     */
+    void setLayoutColor(@ColorInt int normalColor, @ColorInt int pressedColor,
+                        @ColorInt int disabledColor, @ColorInt int selectedColor);
+
+    /**
+     * 设置背景色，渐变
+     *
+     * @param endColor colorInt
+     */
+    void setLayoutColorEnd(@ColorInt int endColor);
+
+    /**
+     * 设置按压状态颜色，渐变
+     *
+     * @param pressEndColor colorInt
+     */
+    void setPressLayoutColorEnd(@ColorInt int pressEndColor);
+
+    /**
+     * 设置各状态背景色,渐变
+     */
+    void setLayoutColorEnd(@ColorInt int normalColor, @ColorInt int pressedColor,
+                           @ColorInt int disabledColor, @ColorInt int selectedColor);
 }

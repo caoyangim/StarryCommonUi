@@ -32,6 +32,8 @@ dependencies {
 
     implementation deps.androidx.appcompat
     implementation deps.androidx.constraintlayout
+    implementation deps.androidx.recyclerview
+    implementation deps.third_part.quick_adapter
     implementation project(path: ':StarryUI')
     testImplementation 'junit:junit:'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'

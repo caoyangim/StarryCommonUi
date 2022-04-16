@@ -277,6 +277,38 @@ public class StarryLinearLayout extends AlphaLinearLayout implements IStarryLayo
     }
 
     @Override
+    public void setLayoutColor(@ColorInt int color) {
+        mLayoutHelper.setLayoutColor(color);
+    }
+
+    @Override
+    public void setPressLayoutColor(@ColorInt int pressColor) {
+        mLayoutHelper.setPressLayoutColor(pressColor);
+    }
+
+    @Override
+    public void setLayoutColor(@ColorInt int normalColor, @ColorInt int pressedColor,
+                               @ColorInt int disabledColor, @ColorInt int selectedColor) {
+        mLayoutHelper.setLayoutColor(normalColor, pressedColor, disabledColor, selectedColor);
+    }
+
+    @Override
+    public void setLayoutColorEnd(@ColorInt int endColor) {
+        mLayoutHelper.setLayoutColorEnd(endColor);
+    }
+
+    @Override
+    public void setPressLayoutColorEnd(@ColorInt int pressEndColor) {
+        mLayoutHelper.setPressLayoutColorEnd(pressEndColor);
+    }
+
+    @Override
+    public void setLayoutColorEnd(@ColorInt int normalColor, @ColorInt int pressedColor,
+                                  @ColorInt int disabledColor, @ColorInt int selectedColor) {
+        mLayoutHelper.setLayoutColorEnd(normalColor, pressedColor, disabledColor, selectedColor);
+    }
+
+    @Override
     protected void dispatchDraw(Canvas canvas) {
         super.dispatchDraw(canvas);
 //        mLayoutHelper.drawBackground();

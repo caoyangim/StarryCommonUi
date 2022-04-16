@@ -308,6 +308,7 @@ public class StarryLayoutHelper implements IStarryLayout {
             return;
         }
         mHalfRadius = halfRadius;
+        setRadiusAndShadow(mRadius, mShadowElevation, mShadowAlpha);
     }
 
     @Override
@@ -468,28 +469,89 @@ public class StarryLayoutHelper implements IStarryLayout {
     }
 
     @Override
+    public void setLayoutColor(@ColorInt int color) {
+        mLayoutColor[VIEW_STATE_NORMAL] = color;
+        drawableNormal.setColor(color);
+        invalidate();
+    }
+
+    @Override
+    public void setPressLayoutColor(@ColorInt int pressColor) {
+        mLayoutColor[VIEW_STATE_PRESSED] = pressColor;
+        drawablePressed.setColor(pressColor);
+        invalidate();
+    }
+
+    @Override
+    public void setLayoutColor(@ColorInt int normalColor, @ColorInt int pressedColor,
+                               @ColorInt int disabledColor, @ColorInt int selectedColor) {
+        mLayoutColor[VIEW_STATE_NORMAL] = normalColor;
+        mLayoutColor[VIEW_STATE_PRESSED] = pressedColor;
+        mLayoutColor[VIEW_STATE_DISABLED] = disabledColor;
+        mLayoutColor[VIEW_STATE_SELECT] = selectedColor;
+        drawableNormal.setColor(normalColor);
+        drawablePressed.setColor(pressedColor);
+        drawableDisable.setColor(disabledColor);
+        drawableSelect.setColor(selectedColor);
+        invalidate();
+    }
+
+    @Override
+    public void setLayoutColorEnd(@ColorInt int endColor) {
+        mLayoutColorEnd[VIEW_STATE_NORMAL] = endColor;
+        drawableNormal.setColors(new int[]{mLayoutColor[VIEW_STATE_NORMAL], mLayoutColorEnd[VIEW_STATE_NORMAL]});
+        invalidate();
+    }
+
+    @Override
+    public void setPressLayoutColorEnd(@ColorInt int pressEndColor) {
+        mLayoutColorEnd[VIEW_STATE_PRESSED] = pressEndColor;
+        drawablePressed.setColors(new int[]{mLayoutColor[VIEW_STATE_PRESSED], mLayoutColorEnd[VIEW_STATE_PRESSED]});
+        invalidate();
+    }
+
+    @Override
+    public void setLayoutColorEnd(@ColorInt int normalColor, @ColorInt int pressedColor,
+                                  @ColorInt int disabledColor, @ColorInt int selectedColor) {
+        mLayoutColorEnd[VIEW_STATE_NORMAL] = normalColor;
+        mLayoutColorEnd[VIEW_STATE_PRESSED] = pressedColor;
+        mLayoutColorEnd[VIEW_STATE_DISABLED] = disabledColor;
+        mLayoutColorEnd[VIEW_STATE_SELECT] = selectedColor;
+        drawableNormal.setColors(new int[]{mLayoutColor[VIEW_STATE_NORMAL], mLayoutColorEnd[VIEW_STATE_NORMAL]});
+        drawablePressed.setColors(new int[]{mLayoutColor[VIEW_STATE_PRESSED], mLayoutColorEnd[VIEW_STATE_PRESSED]});
+        drawableDisable.setColors(new int[]{mLayoutColor[VIEW_STATE_DISABLED], mLayoutColorEnd[VIEW_STATE_DISABLED]});
+        drawableSelect.setColors(new int[]{mLayoutColor[VIEW_STATE_SELECT], mLayoutColorEnd[VIEW_STATE_SELECT]});
+        invalidate();
+    }
+
+    @Override
     public void setBorderColor(@ColorInt int borderColor) {
         mBorderColor[VIEW_STATE_NORMAL] = borderColor;
+        invalidate();
     }
 
     @Override
     public void setPressBorderColor(@ColorInt int borderColor) {
         mBorderColor[VIEW_STATE_PRESSED] = borderColor;
+        invalidate();
     }
 
     @Override
     public void setSelectBorderColor(@ColorInt int borderColor) {
         mBorderColor[VIEW_STATE_SELECT] = borderColor;
+        invalidate();
     }
 
     @Override
     public void setDisableBorderColor(@ColorInt int borderColor) {
         mBorderColor[VIEW_STATE_DISABLED] = borderColor;
+        invalidate();
     }
 
     @Override
     public void setBorderWidth(int borderWidth) {
         mBorderWidth = borderWidth;
+        invalidate();
     }
 
     @Override
