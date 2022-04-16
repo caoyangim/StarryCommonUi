@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.RadioGroup;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
@@ -17,6 +18,7 @@ import androidx.fragment.app.Fragment;
 import com.cy.starrycommonui.R;
 import com.cy.starrycommonui.dialog.ColorChooseDialog;
 import com.cy.strarryui.utils.ResUtils;
+import com.cy.strarryui.widget.layout.IStarryLayout;
 import com.cy.strarryui.widget.layout.StarryButton;
 import com.cy.strarryui.widget.layout.StarryLinearLayout;
 
@@ -30,6 +32,7 @@ public class StarryLayoutFragment extends Fragment {
     private TextView mTvAlpha, mTvElevation, mTvRadius;
     private StarryButton mBtnStartColor, mBtnEndColor;
     private FrameLayout mFlStarColor, mFlEndColor;
+    private RadioGroup mHideRadiusGroup;
 
     private int mRadius;
     private float mShadowAlpha;
@@ -56,6 +59,7 @@ public class StarryLayoutFragment extends Fragment {
         mBtnEndColor = view.findViewById(R.id.btn_choose_end_color);
         mFlStarColor = view.findViewById(R.id.fl_choose_start_color_value);
         mFlEndColor = view.findViewById(R.id.fl_choose_end_color_value);
+        mHideRadiusGroup = view.findViewById(R.id.hide_radius_group);
         setListener();
 
         mLayoutStarry.post(() -> {
@@ -89,13 +93,27 @@ public class StarryLayoutFragment extends Fragment {
         });
         mBtnStartColor.setOnClickListener(mColorChooseListener);
         mBtnEndColor.setOnClickListener(mColorChooseListener);
+
+        mHideRadiusGroup.setOnCheckedChangeListener((group, checkedId) -> {
+            if (checkedId == R.id.hide_radius_none) {
+                mLayoutStarry.setRadius(mRadius, IStarryLayout.HIDE_RADIUS_SIDE_NONE);
+            } else if (checkedId == R.id.hide_radius_left) {
+                mLayoutStarry.setRadius(mRadius, IStarryLayout.HIDE_RADIUS_SIDE_LEFT);
+            } else if (checkedId == R.id.hide_radius_top) {
+                mLayoutStarry.setRadius(mRadius, IStarryLayout.HIDE_RADIUS_SIDE_TOP);
+            } else if (checkedId == R.id.hide_radius_bottom) {
+                mLayoutStarry.setRadius(mRadius, IStarryLayout.HIDE_RADIUS_SIDE_BOTTOM);
+            } else if (checkedId == R.id.hide_radius_right) {
+                mLayoutStarry.setRadius(mRadius, IStarryLayout.HIDE_RADIUS_SIDE_RIGHT);
+            }
+        });
     }
 
     private void updateView() {
         mLayoutStarry.setLayoutColor(ResUtils.getColor(mStartColor));
         mLayoutStarry.setLayoutColorEnd(ResUtils.getColor(mEndColor));
         mLayoutStarry.setRadiusAndShadow(mRadius, mShadowElevation, mShadowAlpha);
-        
+
         mTvRadius.setText(getString(R.string.layout_text_starry_seekbar_radius, mRadius));
         mTvElevation.setText(getString(R.string.layout_text_starry_seekbar_elevation, mShadowElevation));
         mTvAlpha.setText(getString(R.string.layout_text_starry_seekbar_alpha, String.valueOf(mShadowAlpha)));

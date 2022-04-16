@@ -6,4 +6,5 @@
     <string name="layout_text_starry_seekbar_radius">radius: %1$ddp</string>
     <string name="layout_text_starry_seekbar_alpha">alpha: %1$s</string>
     <string name="layout_text_starry_seekbar_elevation">elevation: %1$ddp</string>
+    <string name="layout_text_starry_side_radius">配置取消一个边的圆角（阴影会丢失）</string>
 </resources>
