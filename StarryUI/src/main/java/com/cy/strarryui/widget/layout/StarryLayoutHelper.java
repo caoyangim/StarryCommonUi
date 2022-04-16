@@ -20,6 +20,7 @@ import android.view.ViewOutlineProvider;
 
 import androidx.annotation.ChecksSdkIntAtLeast;
 import androidx.annotation.ColorInt;
+import androidx.annotation.IntRange;
 import androidx.annotation.NonNull;
 
 import com.cy.strarryui.R;
@@ -36,8 +37,10 @@ public class StarryLayoutHelper implements IStarryLayout {
     public static final int RADIUS_OF_HALF_VIEW_WIDTH = -2;
 
     // 颜色渐变方向
-    private static final int COLOR_ORIENTATION_HORIZONTAL = 0;
-    private static final int COLOR_ORIENTATION_VERTICAL = 1;
+    public static final int COLOR_ORIENTATION_HORIZONTAL = 0;
+    public static final int COLOR_ORIENTATION_VERTICAL = 1;
+    public static final int COLOR_ORIENTATION_TL_BR = 2;
+    public static final int COLOR_ORIENTATION_TR_BL = 3;
     private final Context mContext;
     // size
     private int mWidthLimit = 0;
@@ -278,8 +281,13 @@ public class StarryLayoutHelper implements IStarryLayout {
                 return GradientDrawable.Orientation.LEFT_RIGHT;
             case COLOR_ORIENTATION_VERTICAL:
                 return GradientDrawable.Orientation.TOP_BOTTOM;
+            case COLOR_ORIENTATION_TL_BR:
+                return GradientDrawable.Orientation.TL_BR;
+            case COLOR_ORIENTATION_TR_BL:
+                return GradientDrawable.Orientation.TR_BL;
+            default:
+                return GradientDrawable.Orientation.LEFT_RIGHT;
         }
-        return GradientDrawable.Orientation.LEFT_RIGHT;
     }
 
     @Override
@@ -522,6 +530,16 @@ public class StarryLayoutHelper implements IStarryLayout {
         drawableDisable.setColors(new int[]{mLayoutColor[VIEW_STATE_DISABLED], mLayoutColorEnd[VIEW_STATE_DISABLED]});
         drawableSelect.setColors(new int[]{mLayoutColor[VIEW_STATE_SELECT], mLayoutColorEnd[VIEW_STATE_SELECT]});
         invalidate();
+    }
+
+    @Override
+    public void setColorOrientation(@IntRange(from = COLOR_ORIENTATION_HORIZONTAL, to = COLOR_ORIENTATION_TR_BL) int orientation) {
+        mColorOrientation = orientation;
+        final GradientDrawable.Orientation realOrient = getOrientation();
+        drawableNormal.setOrientation(realOrient);
+        drawablePressed.setOrientation(realOrient);
+        drawableDisable.setOrientation(realOrient);
+        drawableSelect.setOrientation(realOrient);
     }
 
     @Override

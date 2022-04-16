@@ -309,9 +309,13 @@ public class StarryLinearLayout extends AlphaLinearLayout implements IStarryLayo
     }
 
     @Override
+    public void setColorOrientation(int orientation) {
+        mLayoutHelper.setColorOrientation(orientation);
+    }
+
+    @Override
     protected void dispatchDraw(Canvas canvas) {
         super.dispatchDraw(canvas);
-//        mLayoutHelper.drawBackground();
         mLayoutHelper.drawDividers(canvas, getWidth(), getHeight());
         mLayoutHelper.dispatchRoundBorderDraw(canvas);
     }

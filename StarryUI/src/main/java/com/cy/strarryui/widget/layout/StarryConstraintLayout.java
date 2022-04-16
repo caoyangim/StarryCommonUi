@@ -298,6 +298,11 @@ public class StarryConstraintLayout extends AlphaConstraintLayout implements ISt
     }
 
     @Override
+    public void setColorOrientation(int orientation) {
+        mLayoutHelper.setColorOrientation(orientation);
+    }
+
+    @Override
     protected void dispatchDraw(Canvas canvas) {
         super.dispatchDraw(canvas);
         mLayoutHelper.drawDividers(canvas, getWidth(), getHeight());

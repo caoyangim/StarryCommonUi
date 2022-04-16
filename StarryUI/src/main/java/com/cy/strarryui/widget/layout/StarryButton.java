@@ -298,6 +298,11 @@ public class StarryButton extends AlphaButton implements IStarryLayout {
     }
 
     @Override
+    public void setColorOrientation(int orientation) {
+        mLayoutHelper.setColorOrientation(orientation);
+    }
+
+    @Override
     protected void dispatchDraw(Canvas canvas) {
         super.dispatchDraw(canvas);
         mLayoutHelper.drawDividers(canvas, getWidth(), getHeight());

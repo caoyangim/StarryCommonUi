@@ -1,9 +1,13 @@
 package com.cy.strarryui.widget.layout;
 
+import static com.cy.strarryui.widget.layout.StarryLayoutHelper.COLOR_ORIENTATION_HORIZONTAL;
+import static com.cy.strarryui.widget.layout.StarryLayoutHelper.COLOR_ORIENTATION_TR_BL;
+
 import android.view.View;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.IntDef;
+import androidx.annotation.IntRange;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -378,4 +382,11 @@ public interface IStarryLayout {
      */
     void setLayoutColorEnd(@ColorInt int normalColor, @ColorInt int pressedColor,
                            @ColorInt int disabledColor, @ColorInt int selectedColor);
+
+    /**
+     * 设置渐变方向
+     *
+     * @param orientation see{@link StarryLayoutHelper#COLOR_ORIENTATION_HORIZONTAL}
+     */
+    public void setColorOrientation(@IntRange(from = COLOR_ORIENTATION_HORIZONTAL, to = COLOR_ORIENTATION_TR_BL) int orientation);
 }

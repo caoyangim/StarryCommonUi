@@ -218,5 +218,54 @@
                 android:textSize="12sp" />
         </RadioGroup>
 
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/ui_common_margin_horizontal"
+            android:layout_marginVertical="@dimen/ui_common_margin_vertical"
+            android:textColor="@color/ui_text_black"
+            android:text="@string/layout_text_starry_choose_orientation" />
+
+        <RadioGroup
+            android:id="@+id/change_color_orientation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/ui_common_margin_horizontal"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/rb_top_bottom"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:background="@null"
+                android:text="上-下"
+                android:textSize="12sp" />
+
+            <RadioButton
+                android:id="@+id/rb_left_right"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:background="@null"
+                android:text="左-右"
+                android:textSize="12sp" />
+
+            <RadioButton
+                android:id="@+id/rb_tl_br"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:background="@null"
+                android:text="左上-右下"
+                android:textSize="12sp" />
+
+            <RadioButton
+                android:id="@+id/rb_tr_bl"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:background="@null"
+                android:text="右上-左下"
+                android:textSize="12sp" />
+        </RadioGroup>
+
     </LinearLayout>
 </ScrollView>

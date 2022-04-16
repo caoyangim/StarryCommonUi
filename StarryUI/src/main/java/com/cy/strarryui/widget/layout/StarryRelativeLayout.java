@@ -294,6 +294,11 @@ public class StarryRelativeLayout extends AlphaRelativeLayout implements IStarry
                                   @ColorInt int disabledColor, @ColorInt int selectedColor) {
         mLayoutHelper.setLayoutColorEnd(normalColor, pressedColor, disabledColor, selectedColor);
     }
+
+    @Override
+    public void setColorOrientation(int orientation) {
+        mLayoutHelper.setColorOrientation(orientation);
+    }
     
     @Override
     protected void dispatchDraw(Canvas canvas) {

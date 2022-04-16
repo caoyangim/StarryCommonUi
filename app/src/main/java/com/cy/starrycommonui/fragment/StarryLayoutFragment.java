@@ -1,5 +1,10 @@
 package com.cy.starrycommonui.fragment;
 
+import static com.cy.strarryui.widget.layout.StarryLayoutHelper.COLOR_ORIENTATION_HORIZONTAL;
+import static com.cy.strarryui.widget.layout.StarryLayoutHelper.COLOR_ORIENTATION_TL_BR;
+import static com.cy.strarryui.widget.layout.StarryLayoutHelper.COLOR_ORIENTATION_TR_BL;
+import static com.cy.strarryui.widget.layout.StarryLayoutHelper.COLOR_ORIENTATION_VERTICAL;
+
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,7 +37,7 @@ public class StarryLayoutFragment extends Fragment {
     private TextView mTvAlpha, mTvElevation, mTvRadius;
     private StarryButton mBtnStartColor, mBtnEndColor;
     private FrameLayout mFlStarColor, mFlEndColor;
-    private RadioGroup mHideRadiusGroup;
+    private RadioGroup mHideRadiusGroup, mChooseColorOrientation;
 
     private int mRadius;
     private float mShadowAlpha;
@@ -60,6 +65,7 @@ public class StarryLayoutFragment extends Fragment {
         mFlStarColor = view.findViewById(R.id.fl_choose_start_color_value);
         mFlEndColor = view.findViewById(R.id.fl_choose_end_color_value);
         mHideRadiusGroup = view.findViewById(R.id.hide_radius_group);
+        mChooseColorOrientation = view.findViewById(R.id.change_color_orientation);
         setListener();
 
         mLayoutStarry.post(() -> {
@@ -107,6 +113,18 @@ public class StarryLayoutFragment extends Fragment {
                 mLayoutStarry.setRadius(mRadius, IStarryLayout.HIDE_RADIUS_SIDE_RIGHT);
             }
         });
+
+        mChooseColorOrientation.setOnCheckedChangeListener(((group, checkedId) -> {
+            if (checkedId == R.id.rb_top_bottom) {
+                mLayoutStarry.setColorOrientation(COLOR_ORIENTATION_VERTICAL);
+            } else if (checkedId == R.id.rb_left_right) {
+                mLayoutStarry.setColorOrientation(COLOR_ORIENTATION_HORIZONTAL);
+            } else if (checkedId == R.id.rb_tl_br) {
+                mLayoutStarry.setColorOrientation(COLOR_ORIENTATION_TL_BR);
+            } else if (checkedId == R.id.rb_tr_bl) {
+                mLayoutStarry.setColorOrientation(COLOR_ORIENTATION_TR_BL);
+            }
+        }));
     }
 
     private void updateView() {
