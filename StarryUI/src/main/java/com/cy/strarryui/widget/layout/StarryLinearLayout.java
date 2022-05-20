@@ -3,7 +3,6 @@ package com.cy.strarryui.widget.layout;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.util.AttributeSet;
-import android.util.Log;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
@@ -35,15 +34,6 @@ public class StarryLinearLayout extends AlphaLinearLayout implements IStarryLayo
         mLayoutHelper = new StarryLayoutHelper(context, attrs, defStyleAttr, this);
         setChangeAlphaWhenPress(false);
         setChangeAlphaWhenDisable(false);
-    }
-
-    @Override
-    protected void drawableStateChanged() {
-        super.drawableStateChanged();
-        final int[] state = getDrawableState();
-        for (int i : state) {
-            Log.e(">>>", this.hashCode() + "," + Integer.toHexString(i));
-        }
     }
 
     @Override

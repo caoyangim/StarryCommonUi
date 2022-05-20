@@ -410,17 +410,19 @@ public class StarryLayoutHelper implements IStarryLayout {
                     float radius = getRealRadius();
                     if (isRadiusWithSideHidden()) {
                         int left = 0, top = 0, right = w, bottom = h;
-                        if (mHideRadiusSide == HIDE_RADIUS_SIDE_LEFT) {
+                        if ((mHideRadiusSide & MASK_HORIZONTAL) == HIDE_RADIUS_SIDE_LEFT) {
                             left -= radius;
-                        } else if (mHideRadiusSide == HIDE_RADIUS_SIDE_TOP) {
+                        }
+                        if ((mHideRadiusSide & MASK_VERTICAL) == HIDE_RADIUS_SIDE_TOP) {
                             top -= radius;
-                        } else if (mHideRadiusSide == HIDE_RADIUS_SIDE_RIGHT) {
+                        }
+                        if ((mHideRadiusSide & MASK_HORIZONTAL) == HIDE_RADIUS_SIDE_RIGHT) {
                             right += radius;
-                        } else if (mHideRadiusSide == HIDE_RADIUS_SIDE_BOTTOM) {
+                        }
+                        if ((mHideRadiusSide & MASK_VERTICAL) == HIDE_RADIUS_SIDE_BOTTOM) {
                             bottom += radius;
                         }
-                        outline.setRoundRect(left, top,
-                                right, bottom, radius);
+                        outline.setRoundRect(left, top, right, bottom, radius);
                         return;
                     }
 

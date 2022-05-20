@@ -16,18 +16,20 @@ import java.lang.annotation.RetentionPolicy;
  * @author Duckbb
  */
 public interface IStarryLayout {
-    int HIDE_RADIUS_SIDE_NONE = 0;
-    int HIDE_RADIUS_SIDE_TOP = 1;
-    int HIDE_RADIUS_SIDE_RIGHT = 2;
-    int HIDE_RADIUS_SIDE_BOTTOM = 3;
-    int HIDE_RADIUS_SIDE_LEFT = 4;
+    int HIDE_RADIUS_SIDE_NONE = 0x0;
+    int HIDE_RADIUS_SIDE_TOP = 0x0030;
+    int HIDE_RADIUS_SIDE_RIGHT = 0x0005;
+    int HIDE_RADIUS_SIDE_BOTTOM = 0x0050;
+    int HIDE_RADIUS_SIDE_LEFT = 0x0003;
+    int MASK_HORIZONTAL = 0x000F;
+    int MASK_VERTICAL = 0x00F0;
 
     @IntDef(value = {
             HIDE_RADIUS_SIDE_NONE,
             HIDE_RADIUS_SIDE_TOP,
             HIDE_RADIUS_SIDE_RIGHT,
             HIDE_RADIUS_SIDE_BOTTOM,
-            HIDE_RADIUS_SIDE_LEFT})
+            HIDE_RADIUS_SIDE_LEFT}, flag = true)
     @Retention(RetentionPolicy.SOURCE)
     @interface HideRadiusSide {
     }
